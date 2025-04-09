@@ -2,5 +2,5 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    App\Providers\Filament\MailingPanelProvider::class,
+    App\Providers\Filament\PublishingPanelProvider::class,
 ];
