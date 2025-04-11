@@ -13,6 +13,7 @@ it('save correct fields', function () {
         'date',
         'email',
         'campaign',
+        'disposition',
         'email_sent_at',
     ]));
 });

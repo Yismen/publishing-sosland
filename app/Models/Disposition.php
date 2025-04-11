@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Disposition extends Model
 {
-    protected $fillable = ['name', 'is_mailable'];
-
     /** @use HasFactory<\Database\Factories\DispositionFactory> */
     use HasFactory;
+
+    protected $fillable = ['name', 'is_mailable'];
 }

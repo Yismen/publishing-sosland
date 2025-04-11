@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('email');
             $table->string('campaign');
+            $table->string('disposition');
             $table->dateTime('email_sent_at')->nullable();
             $table->timestamps();
         });

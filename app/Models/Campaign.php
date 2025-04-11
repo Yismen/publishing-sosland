@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Campaign extends Model
 {
-    protected $fillable = ['name'];
-
     /** @use HasFactory<\Database\Factories\CampaignFactory> */
     use HasFactory;
+
+    protected $fillable = ['name'];
 }

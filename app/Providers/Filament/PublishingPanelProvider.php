@@ -27,6 +27,8 @@ class PublishingPanelProvider extends PanelProvider
             ->default()
             ->id('publishing')
             ->path('publishing')
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('60s')
             ->login()
             ->colors([
                 'primary' => Color::Amber,
