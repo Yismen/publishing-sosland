@@ -26,6 +26,7 @@ class ImportContacts extends Page implements HasForms, HasTable
 
     public static function canAccess(): bool
     {
+        return true;
         return auth()->user()->canManageSettings();
     }
 
