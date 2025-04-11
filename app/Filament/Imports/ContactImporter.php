@@ -2,6 +2,7 @@
 
 namespace App\Filament\Imports;
 
+use Carbon\Carbon;
 use App\Models\Contact;
 use Illuminate\Validation\Rule;
 use Filament\Actions\Imports\Importer;
@@ -16,26 +17,30 @@ class ContactImporter extends Importer
     {
         return [
             ImportColumn::make('name')
-                ->guess(['first_name'])
+                ->guess(['first_name', 'name'])
+                ->castStateUsing(fn($state) => str($state)->trim()->title())
                 ->requiredMapping()
                 ->rules([
                     'required',
                     'max:255'
                 ]),
             ImportColumn::make('last_name')
-                // ->guess(['last_name'])
+                ->guess(['last_name'])
+                ->castStateUsing(fn($state) => str($state)->trim()->title())
                 ->requiredMapping()
                 ->rules([
                     'max:255',
                 ]),
             ImportColumn::make('date')
                 ->guess(['start_time'])
+                ->castStateUsing(fn($state) => Carbon::parse($state)->format('Y-m-d'))
                 ->requiredMapping()
                 ->rules([
                     'required',
                     'date'
                 ]),
             ImportColumn::make('email')
+                ->castStateUsing(fn($state) => str($state)->trim()->lower())
                 ->requiredMapping()
                 ->rules([
                     'required',
@@ -44,12 +49,14 @@ class ContactImporter extends Importer
                 ]),
             ImportColumn::make('campaign')
                 ->guess(['script_name'])
+                ->castStateUsing(fn($state) => str($state)->trim()->title())
                 ->requiredMapping()
                 ->rules([
                     'required',
                     'max:255'
                 ]),
             ImportColumn::make('disposition')
+                ->castStateUsing(fn($state) => str($state)->trim()->title())
                 ->guess([
                     'term_code'
                 ])
@@ -66,8 +73,8 @@ class ContactImporter extends Importer
     {
         return Contact::firstOrNew([
             'email' => $this->data['email'],
-            // 'date' => $this->data['date'],
-            'email_sent_at' => null
+            'date' => $this->data['date'],
+            // 'email_sent_at' => null
         ], $this->data);
     }
 

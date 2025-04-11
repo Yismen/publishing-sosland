@@ -64,8 +64,12 @@ class ImportContacts extends Page implements HasForms, HasTable
                     ->sortable()
                     ->searchable(),
 
-                TextColumn::make('created_at'),
-                TextColumn::make('updated_at'),
+                TextColumn::make('created_at')
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
+                TextColumn::make('updated_at')
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
             ])
             ->filters([
                 // ...
