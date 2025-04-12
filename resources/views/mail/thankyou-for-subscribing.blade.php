@@ -1,10 +1,4 @@
-<x-mail::message>
-{{-- <x-mail::header>
-
-</x-mail::header> --}}
-
-![Sosland]({{ asset('storage/img/petfood-logo.png') }})
-
+<x-sosland.mail.message url="{{ $banner_url }}" banner_path="{{ $banner_path }}">
 Hello {{ $contact->name }},
 
 Thank you for subscribing! We're excited to have you join our community of food industry professionals. Expect regular updates packed with the latest industry insights, news, and trends delivered right to your inbox.
@@ -17,16 +11,11 @@ To ensure you receive our newsletters without interruption, please safelist our 
 
 We have instructions for safelisting with other email providers [HERE](https://sosland-email.com/portal/wts/ug%5EcmT%5Eh3bybbSEhaMf-4aVca).
 
-
 If you have questions about your subscription, email [subscriptions@sosland.com](subscriptions@sosland.com).
 
-For news and information in real time bookmark our website [petfoodprocessing.net](https://www.petfoodprocessing.net).
+For news and information in real time bookmark our website [{{ str($banner_url)->after('//')->after('www.') }}]({{ $banner_url }}).
 
 Best regards,
 
 ## The Sosland Team
-
-</x-mail::message>
-{{-- <x-mail::footer>
-
-</x-mail::footer> --}}
+</x-sosland.mail.message>
