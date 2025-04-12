@@ -51,3 +51,14 @@ it('doesnt send email if there is no new contacts with correct disposition', fun
 
     Mail::assertNothingQueued();
 });
+
+it('is schedulled to run every hourly', function () {
+
+    $addedToScheduler = collect(app()->make(\Illuminate\Console\Scheduling\Schedule::class)->events())
+        ->filter(function ($element) {
+            return str($element->command)->contains('app:send-welcome-emails-command');
+        })->first();
+
+    $this->assertNotNull($addedToScheduler);
+    $this->assertEquals('0 * * * *', $addedToScheduler->expression);
+});

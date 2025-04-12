@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Disposition;
+use App\Traits\Models\InteracstsWithModelCaching;
 
 it('save correct fields', function () {
     $data = Disposition::factory()->make();

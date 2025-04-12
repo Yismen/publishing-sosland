@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Disposition;
 use App\Models\User;
+use App\Models\Disposition;
 use Illuminate\Auth\Access\Response;
 
 class DispositionPolicy
@@ -13,7 +13,7 @@ class DispositionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class DispositionPolicy
      */
     public function view(User $user, Disposition $disposition): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class DispositionPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class DispositionPolicy
      */
     public function update(User $user, Disposition $disposition): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class DispositionPolicy
      */
     public function delete(User $user, Disposition $disposition): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class DispositionPolicy
      */
     public function restore(User $user, Disposition $disposition): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class DispositionPolicy
      */
     public function forceDelete(User $user, Disposition $disposition): bool
     {
-        return false;
+        return true;
     }
 }

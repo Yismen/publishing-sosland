@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Disposition::upsert(['name' => 'Complete', 'is_mailable' => true], ['name']);
+        Disposition::create(['name' => 'Complete', 'is_mailable' => true]);
     }
 
     /**

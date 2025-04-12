@@ -3,9 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Models\Contact;
-use App\Mail\ThankyouForSubscribing;
 use Illuminate\Console\Command;
+use App\Mail\ThankyouForSubscribing;
 use Illuminate\Support\Facades\Mail;
+use App\Services\DispositionsService;
 
 class SendWelcomeEmailsCommand extends Command
 {
@@ -29,12 +30,14 @@ class SendWelcomeEmailsCommand extends Command
     public function handle()
     {
         $mailables = Contact::query()
-            ->whereIn('disposition', config('app.mailable_dispositions'))
+            ->whereIn('disposition', DispositionsService::getNames())
             ->whereNull('email_sent_at')
             ->get();
 
         foreach ($mailables as $mailable) {
             Mail::to($mailable)->send(new ThankyouForSubscribing($mailable));
         }
+
+        $this->info("Messages sent to {$mailables->count()} new customers");
     }
 }

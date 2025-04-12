@@ -5,6 +5,7 @@ namespace App\Filament\Imports;
 use Carbon\Carbon;
 use App\Models\Contact;
 use Illuminate\Validation\Rule;
+use App\Services\DispositionsService;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Models\Import;
@@ -56,14 +57,14 @@ class ContactImporter extends Importer
                     'max:255'
                 ]),
             ImportColumn::make('disposition')
-                ->castStateUsing(fn($state) => str($state)->trim()->title())
+                ->castStateUsing(fn($state) => str($state)->trim()->lower())
                 ->guess([
                     'term_code'
                 ])
                 ->requiredMapping()
                 ->rules([
                     'required',
-                    Rule::in(config('app.mailable_dispositions')),
+                    Rule::in(DispositionsService::getNames()),
                     'max:255',
                 ]),
         ];

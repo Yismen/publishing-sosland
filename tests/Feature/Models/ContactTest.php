@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Contact;
+use App\Traits\Models\InteracstsWithModelCaching;
 
 it('save correct fields', function () {
     $data = Contact::factory()->make();
