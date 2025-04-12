@@ -8,7 +8,7 @@ it('save correct fields', function () {
     Contact::create($data->toArray());
 
     $this->assertDatabaseHas(Contact::class, $data->only([
-        'name',
+        'first_name',
         'last_name',
         'date',
         'email',

@@ -17,13 +17,31 @@ class ContactFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
+            'first_name' => $this->faker->name,
             'last_name' => $this->faker->lastName,
             'date' => now(),
             'email' => $this->faker->email,
             'campaign' => $this->faker->name,
-            'disposition' => $this->faker->name,
+            'disposition' => 'Complete',
             'email_sent_at' => null,
         ];
+    }
+
+    public function unNotified(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'email_sent_at' => null,
+            ];
+        });
+    }
+
+    public function notified(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'email_sent_at' => now(),
+            ];
+        });
     }
 }

@@ -33,14 +33,14 @@ class ImportContacts extends Page implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->poll('80s')
+            ->poll('30s')
             ->deferLoading()
             ->query(Contact::query())
             ->columns([
                 TextColumn::make('date')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('name')
+                TextColumn::make('first_name')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('last_name')

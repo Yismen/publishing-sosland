@@ -16,7 +16,7 @@ class ContactImporter extends Importer
     public static function getColumns(): array
     {
         return [
-            ImportColumn::make('name')
+            ImportColumn::make('first_name')
                 ->guess(['first_name', 'name'])
                 ->castStateUsing(fn($state) => str($state)->trim()->title())
                 ->requiredMapping()

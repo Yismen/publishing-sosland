@@ -125,7 +125,7 @@ return [
 
     'mailable_dispositions' => [
         'Complete',
-        'complete'
+        'complete',
     ],
 
 ];
