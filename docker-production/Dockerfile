@@ -30,7 +30,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progre
 
 # Copy Laravel env and optimize configuration
 # (Ensure .env is present in build context; it will be used for config caching)
-COPY .env /var/www/.env
+COPY .env.example /var/www/.env
 RUN php artisan key:generate --ansi && \
     php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan optimize
 
