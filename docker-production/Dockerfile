@@ -30,9 +30,15 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progre
 
 # Copy Laravel env and optimize configuration
 # (Ensure .env is present in build context; it will be used for config caching)
-COPY .env.example /var/www/.env
-RUN php artisan key:generate --ansi && \
-    php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan optimize
+# COPY .env.example /var/www/.env
+# RUN if .env ; then COPY .env /var/www/.env ; COPY .env.example /var/www/.env; fi
+RUN if [ -f "./.env" ]; then \
+      cp ./.env /var/www/.env; \
+    else \
+      cp ./.env.example /var/www/.env; \
+    fi
+# RUN php artisan key:generate --ansi && \
+#     php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan optimize
 
 # Set proper permissions for storage (so that 'yjorge' can write logs, cache, etc.)
 # RUN chmod -R 775 storage bootstrap/cache
@@ -57,6 +63,7 @@ EXPOSE 9000
 
 # Start Supervisor (which will start php-fpm, queue worker, and cron)
 # CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/laravel.conf"]
+# CMD ["supervisor reread","supervisor update","supervisor start", "laravel-worker:*", "/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
 RUN
