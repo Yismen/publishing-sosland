@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use App\Services\CampaignBannerInfoService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ThankyouForSubscribing extends Mailable
+class ThankyouForSubscribing extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
     /**
