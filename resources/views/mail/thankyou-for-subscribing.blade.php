@@ -1,4 +1,8 @@
 <x-sosland.mail.message url="{{ $banner_url }}" banner_path="{{ $banner_path }}">
+
+<a href="{{ $banner_url }}" style="display: inline-block;"><img src="{{ $message->embed($banner_path) }}" class="logo" alt="Sosland Logo" style="width: auto; height: 120px;">
+</a>
+<br />
 Hello {{ $contact->name }},
 
 Thank you for subscribing! We're excited to have you join our community of food industry professionals. Expect regular updates packed with the latest industry insights, news, and trends delivered right to your inbox.

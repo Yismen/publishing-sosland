@@ -2,11 +2,6 @@
     'url', 'banner_path'
 ])
 <x-sosland.mail.layout>
-{{-- Header --}}
-    <x-slot:header >
-        <x-sosland.mail.header url="{{ $url }}" banner_path="{{ $banner_path }}">
-        </x-sosland.mail.header>
-    </x-slot:header>
 
 {{-- Body --}}
 {{ $slot }}
@@ -53,11 +48,4 @@
 </x-sosland.mail.subcopy>
 </x-slot:subcopy>
 @endisset
-
-{{-- Footer --}}
-{{-- <x-slot:footer>
-<x-sosland.mail.footer>
-© {{ date('Y') }} {{ config('app.name') }}. {{ __('All rights reserved.') }}
-</x-sosland.mail.footer>
-</x-slot:footer> --}}
 </x-sosland.mail.layout>
