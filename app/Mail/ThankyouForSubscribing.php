@@ -36,10 +36,11 @@ class ThankyouForSubscribing extends Mailable implements ShouldQueue
     {
         return new Content(
             markdown: 'mail.thankyou-for-subscribing',
-        )->with([
-            'banner_url' => CampaignBannerInfoService::getData($this->contact)['banner_url'],
-            'banner_path' => CampaignBannerInfoService::getData($this->contact)['banner_path'],
-        ]);
+            with: [
+                'banner_url' => CampaignBannerInfoService::getData($this->contact)['banner_url'],
+                'banner_path' => CampaignBannerInfoService::getData($this->contact)['banner_path'],
+            ]
+        );
     }
 
     /**
