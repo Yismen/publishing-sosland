@@ -1,6 +1,6 @@
-<x-sosland.mail.message url="{{ $banner_url }}" banner_path="{{ $banner_path }}">
+<x-sosland.mail.message url="{{ $banner_url }}" banner_path="{{ url($banner_path) }}">
 
-<a href="{{ $banner_url }}" style="display: inline-block;"><img src="{{ $message->embed($banner_path) }}" class="logo" alt="Sosland Logo" style="width: auto; height: 120px;">
+<a href="{{ $banner_url }}" style="display: inline-block;"><img src="{{ $message->embed(url($banner_path)) }}" class="logo" alt="Sosland Logo" style="width: auto; height: 120px;">
 </a>
 <br />
 Hello {{ $contact->name }},
