@@ -63,7 +63,7 @@ describe('model', function () {
         $mailable = new ThankyouForSubscribing($contact);
 
         // $mailable->assertSeeInHtml('millingandbaking-logo');
-        $mailable->assertSeeInHtml('bakingbusiness.net');
+        $mailable->assertSeeInHtml('bakingbusiness.com');
     });
 });
 
