@@ -42,7 +42,7 @@ Best regards,
           Outside the US call <a href="tel:+(816) 756-1000" style="color: #191919">(816) 756-1000</a><br>
           &nbsp; </span></p>
           <p class="MsoNormal" align="center" style="text-align:center"><span style="font-size:9.0pt;font-family:&quot;Helvetica&quot;,sans-serif;mso-fareast-font-family:
-          &quot;Times New Roman&quot;;color:white"><a href="https://sosland.com" target="_blank"><img border="0" id="_x0000_i1026" src="https://hostedcontent.dragonforms.com/hosted/images/dragon/12274/1871.png"></a></span></p>
+          &quot;Times New Roman&quot;;color:white"><a href="https://sosland.com" target="_blank"><img border="0" id="_x0000_i1026" src="{{ $message->embed(url('img/sosland.png')) }}"></a></span></p>
           <p style="text-align: center; color: white;">© {{ date('Y') }}&nbsp;Sosland Publishing Company</span></p>
           </td>
          </tr>
