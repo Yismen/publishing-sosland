@@ -75,6 +75,7 @@ class ContactImporter extends Importer
         return Contact::firstOrNew([
             'email' => $this->data['email'],
             'date' => $this->data['date'],
+            'campaign' => $this->data['campaign'],
             // 'email_sent_at' => null
         ], $this->data);
     }
