@@ -20,6 +20,12 @@ return new class extends Migration
         });
 
         Disposition::create(['name' => 'Complete', 'is_mailable' => true]);
+        Disposition::create(['name' => 'Complete Replacement', 'is_mailable' => true]);
+        Disposition::create(['name' => 'Complete With Referral', 'is_mailable' => true]);
+        Disposition::create(['name' => 'Dual Dispo for Two Pubs', 'is_mailable' => true]);
+        Disposition::create(['name' => 'Dual Dispo for Two Pubs With Referral', 'is_mailable' => true]);
+        Disposition::create(['name' => 'Qual Dispo for Three Pubs', 'is_mailable' => true]);
+        Disposition::create(['name' => 'Qual Dispo for Three Pubs With Referral', 'is_mailable' => true]);
     }
 
     /**
