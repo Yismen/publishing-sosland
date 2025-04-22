@@ -14,9 +14,7 @@ describe('model', function () {
     });
 
     it('has the right subject', function () {
-        $contact = Contact::factory()->unNotified()->create([
-            'campaign' => 'Anything containing milling in it'
-        ]);
+        $contact = Contact::factory()->unNotified()->create();
 
         $mailable = new ThankyouForSubscribing($contact);
 
@@ -66,17 +64,5 @@ describe('model', function () {
         $mailable->assertSeeInHtml('bakingbusiness.com');
     });
 });
-
-// it('updates the email sent at field in the contact after the email is sent ', function () {
-//     $contact = Contact::factory()->unNotified()->create([
-//         'campaign' => 'milling in it'
-//     ]);
-
-//     // Mail::sendNow((new ThankyouForSubscribing($contact))->to($contact));
-//     Mail::send(new ThankyouForSubscribing($contact))->to($contact);
-
-//     expect($contact->email_sent_at)
-//         ->not->toBeNull();
-// });
 
 // fires event contat_aequired_email_sent

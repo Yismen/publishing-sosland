@@ -29,15 +29,22 @@ class SendWelcomeEmailsCommand extends Command
      */
     public function handle()
     {
-        $mailables = Contact::query()
+        $contacts = Contact::query()
             ->whereIn('disposition', DispositionsService::getNames())
             ->whereNull('email_sent_at')
             ->get();
 
-        foreach ($mailables as $mailable) {
-            Mail::to($mailable)->send(new ThankyouForSubscribing($mailable));
+        foreach ($contacts as $contact) {
+            try {                
+                Mail::to($contact)->send(new ThankyouForSubscribing($contact));
+
+                $contact->updateQuietly(['email_sent_at' => now()]);
+            } catch (\Throwable $th) {
+
+                $contact->updateQuietly(['email_sent_at' => null]);
+            }
         }
 
-        $this->info("Messages sent to {$mailables->count()} new customers");
+        $this->info("Messages sent to {$contacts->count()} new customers");
     }
 }

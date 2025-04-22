@@ -21,7 +21,7 @@ class ContactFactory extends Factory
             'last_name' => $this->faker->lastName,
             'date' => now(),
             'email' => $this->faker->email,
-            'campaign' => $this->faker->name,
+            'campaign' => 'milling',
             'disposition' => 'Complete',
             'email_sent_at' => null,
         ];
