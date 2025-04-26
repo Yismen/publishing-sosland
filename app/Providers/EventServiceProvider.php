@@ -21,11 +21,5 @@ class EventServiceProvider extends ProvidersEventServiceProvider
     /**
      * Bootstrap services.
      */
-    public function boot(): void
-    {
-        Event::listen(
-            MessageSent::class,
-            [UpdateEmailSentAtField::class, 'handle']
-        );
-    }
+    public function boot(): void {}
 }

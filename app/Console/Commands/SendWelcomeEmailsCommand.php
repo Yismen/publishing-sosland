@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\ProcessGreetCustomers;
 use App\Models\Contact;
 use Illuminate\Console\Command;
 use App\Mail\ThankyouForSubscribing;
@@ -35,13 +36,8 @@ class SendWelcomeEmailsCommand extends Command
             ->get();
 
         foreach ($contacts as $contact) {
-            try {                
-                Mail::to($contact)->send(new ThankyouForSubscribing($contact));
-
-                $contact->updateQuietly(['email_sent_at' => now()]);
-            } catch (\Throwable $th) {
-
-                $contact->updateQuietly(['email_sent_at' => null]);
+            if ($contact->email_sent_at === null) {
+                ProcessGreetCustomers::dispatch($contact);
             }
         }
 

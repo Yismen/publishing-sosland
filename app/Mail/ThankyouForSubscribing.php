@@ -26,6 +26,7 @@ class ThankyouForSubscribing extends Mailable implements ShouldQueue
     {
         return new Envelope(
             subject: 'Thank you for Subscribing',
+            to: [$this->contact->email],
         );
     }
 

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Mail\Events\MessageSent;
 
-describe('model', function () {
+describe('thank you for subscribing email', function () {
     beforeEach(function () {
         Mail::fake(ThankyouForSubscribing::class);
     });
@@ -21,7 +21,7 @@ describe('model', function () {
         $mailable->assertHasSubject('Thank you for Subscribing');
     });
 
-    it('has the defaul text', function () {
+    it('has the default text', function () {
         $contact = Contact::factory()->unNotified()->create([
             'campaign' => 'Anything containing milling in it'
         ]);
@@ -38,7 +38,6 @@ describe('model', function () {
 
         $mailable = new ThankyouForSubscribing($contact);
 
-        // $mailable->assertSeeInHtml('petfoodprocessing-logo');
         $mailable->assertSeeInHtml('petfoodprocessing.net');
     });
 
@@ -63,6 +62,24 @@ describe('model', function () {
         // $mailable->assertSeeInHtml('millingandbaking-logo');
         $mailable->assertSeeInHtml('bakingbusiness.com');
     });
+
+    // it('listen to the message sent event', function () {
+    //     $contact = Contact::factory()->unNotified()->create();
+    //     Event::fake(MessageSent::class);
+
+    //     Mail::send(new ThankyouForSubscribing($contact));
+
+    //     Event::assertListening(
+    //         MessageSent::class,
+    //         \App\Listeners\UpdateEmailSentAtField::class
+    //     );
+    // });
 });
 
-// fires event contat_aequired_email_sent
+// it('listen to the message sent event message sent', function () {
+//     $contact = Contact::factory()->unNotified()->create();
+
+//     Mail::sendNow(new ThankyouForSubscribing($contact));
+
+
+// });
