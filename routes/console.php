@@ -6,3 +6,5 @@ use Illuminate\Support\Facades\Schedule;
 use App\Console\Commands\SendWelcomeEmailsCommand;
 
 Schedule::command(SendWelcomeEmailsCommand::class)->hourly()->withoutOverlapping();
+
+Schedule::command('telescope:prune --hours=120')->daily();

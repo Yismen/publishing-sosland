@@ -11,6 +11,7 @@ use App\Services\BreezeCoreService;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use Stephenjude\FilamentDebugger\DebuggerPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -52,7 +53,11 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->plugins([
-                BreezeCoreService::make()
+                BreezeCoreService::make(),
+                DebuggerPlugin::make()
+                    ->telescopeNavigation(true)
+                    ->horizonNavigation(false)
+                    ->pulseNavigation(false),
             ])
             ->authMiddleware([
                 Authenticate::class,
