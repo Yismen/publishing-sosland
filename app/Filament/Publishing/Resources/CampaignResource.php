@@ -3,15 +3,12 @@
 namespace App\Filament\Publishing\Resources;
 
 use App\Filament\Publishing\Resources\CampaignResource\Pages;
-use App\Filament\Publishing\Resources\CampaignResource\RelationManagers;
 use App\Models\Campaign;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CampaignResource extends Resource
 {

@@ -1,11 +1,9 @@
 <?php
 
-use App\Models\Contact;
 use App\Jobs\ProcessGreetCustomers;
 use App\Mail\ThankyouForSubscribing;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Queue;
-use App\Console\Commands\SendWelcomeEmailsCommand;
 
 describe('greet new customers', function () {
     beforeEach(function () {

@@ -2,9 +2,9 @@
 
 namespace App\Filament\Publishing\Resources\DispositionResource\Pages;
 
+use App\Filament\Publishing\Resources\DispositionResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-use App\Filament\Publishing\Resources\DispositionResource;
 
 class EditDisposition extends EditRecord
 {

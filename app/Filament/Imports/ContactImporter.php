@@ -2,14 +2,14 @@
 
 namespace App\Filament\Imports;
 
-use Carbon\Carbon;
 use App\Models\Contact;
 use App\Rules\ValidCampaign;
-use Illuminate\Validation\Rule;
 use App\Services\DispositionsService;
-use Filament\Actions\Imports\Importer;
+use Carbon\Carbon;
 use Filament\Actions\Imports\ImportColumn;
+use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
+use Illuminate\Validation\Rule;
 
 class ContactImporter extends Importer
 {
@@ -20,48 +20,48 @@ class ContactImporter extends Importer
         return [
             ImportColumn::make('first_name')
                 ->guess(['first_name', 'name'])
-                ->castStateUsing(fn($state) => str($state)->trim()->title())
+                ->castStateUsing(fn ($state) => str($state)->trim()->title())
                 ->requiredMapping()
                 ->rules([
                     'required',
-                    'max:255'
+                    'max:255',
                 ]),
             ImportColumn::make('last_name')
                 ->guess(['last_name'])
-                ->castStateUsing(fn($state) => str($state)->trim()->title())
+                ->castStateUsing(fn ($state) => str($state)->trim()->title())
                 ->requiredMapping()
                 ->rules([
                     'max:255',
                 ]),
             ImportColumn::make('date')
                 ->guess(['start_time'])
-                ->castStateUsing(fn($state) => Carbon::parse($state)->format('Y-m-d'))
+                ->castStateUsing(fn ($state) => Carbon::parse($state)->format('Y-m-d'))
                 ->requiredMapping()
                 ->rules([
                     'required',
-                    'date'
+                    'date',
                 ]),
             ImportColumn::make('email')
-                ->castStateUsing(fn($state) => str($state)->trim()->lower())
+                ->castStateUsing(fn ($state) => str($state)->trim()->lower())
                 ->requiredMapping()
                 ->rules([
                     'required',
                     'email',
-                    'max:255'
+                    'max:255',
                 ]),
             ImportColumn::make('campaign')
                 ->guess(['script_name'])
-                ->castStateUsing(fn($state) => str($state)->trim()->title())
+                ->castStateUsing(fn ($state) => str($state)->trim()->title())
                 ->requiredMapping()
                 ->rules([
                     'required',
                     'max:255',
-                    new ValidCampaign
+                    new ValidCampaign,
                 ]),
             ImportColumn::make('disposition')
-                ->castStateUsing(fn($state) => str($state)->trim()->lower())
+                ->castStateUsing(fn ($state) => str($state)->trim()->lower())
                 ->guess([
-                    'term_code'
+                    'term_code',
                 ])
                 ->requiredMapping()
                 ->rules([
@@ -84,10 +84,10 @@ class ContactImporter extends Importer
 
     public static function getCompletedNotificationBody(Import $import): string
     {
-        $body = 'Your contact import has completed and ' . number_format($import->successful_rows) . ' ' . str('row')->plural($import->successful_rows) . ' imported.';
+        $body = 'Your contact import has completed and '.number_format($import->successful_rows).' '.str('row')->plural($import->successful_rows).' imported.';
 
         if ($failedRowsCount = $import->getFailedRowsCount()) {
-            $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to import.';
+            $body .= ' '.number_format($failedRowsCount).' '.str('row')->plural($failedRowsCount).' failed to import.';
         }
 
         return $body;

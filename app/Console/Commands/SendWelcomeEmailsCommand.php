@@ -4,10 +4,8 @@ namespace App\Console\Commands;
 
 use App\Jobs\ProcessGreetCustomers;
 use App\Models\Contact;
-use Illuminate\Console\Command;
-use App\Mail\ThankyouForSubscribing;
-use Illuminate\Support\Facades\Mail;
 use App\Services\DispositionsService;
+use Illuminate\Console\Command;
 
 class SendWelcomeEmailsCommand extends Command
 {

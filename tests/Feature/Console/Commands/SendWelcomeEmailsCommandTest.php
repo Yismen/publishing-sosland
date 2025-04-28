@@ -1,10 +1,8 @@
 <?php
 
-use App\Models\Contact;
-use App\Mail\ThankyouForSubscribing;
-use Illuminate\Support\Facades\Mail;
 use App\Console\Commands\SendWelcomeEmailsCommand;
 use App\Jobs\ProcessGreetCustomers;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Queue;
 
 describe('send welcome email command', function () {
@@ -34,7 +32,6 @@ describe('send welcome email command', function () {
 
         Queue::assertNotPushed(ProcessGreetCustomers::class);
     });
-
 
     it('queue email to new contacts with an acceptable disposition ', function () {
         $contact = Contact::factory()->unNotified()->create(['disposition' => 'complete']);

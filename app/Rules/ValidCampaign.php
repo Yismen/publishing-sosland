@@ -6,7 +6,6 @@ use App\Models\Campaign;
 use App\Services\CampaignService;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Support\Facades\Cache;
 
 class ValidCampaign implements ValidationRule
 {

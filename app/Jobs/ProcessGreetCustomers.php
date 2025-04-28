@@ -2,11 +2,11 @@
 
 namespace App\Jobs;
 
-use App\Models\Contact;
 use App\Mail\ThankyouForSubscribing;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Foundation\Queue\Queueable;
+use App\Models\Contact;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Mail;
 
 class ProcessGreetCustomers implements ShouldQueue
 {

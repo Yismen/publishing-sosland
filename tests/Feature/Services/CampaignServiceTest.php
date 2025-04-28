@@ -2,15 +2,11 @@
 
 use App\Models\Campaign;
 use App\Services\CampaignService;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\ItemNotFoundException;
 
 it('finds the correct campaign when operator is appersand and all keywords are present', function () {
     $name = 'Some long name with keyword 1 and keyword 2 and a lot of other stuff';
 
-
     Campaign::factory()->count(3)->create();
-
 
     $campaign = Campaign::factory()->create([
         'name' => $name,
@@ -51,7 +47,6 @@ it('return the campaign based on file name using any keyword', function () {
     expect(CampaignService::fromString($name)->id)
         ->toBe($campaign->id);
 });
-
 
 it('return exception when there is not campaing with the name provided based on keywords', function () {
     $name = 'Some long name without correct keys and a lot of other stuff';

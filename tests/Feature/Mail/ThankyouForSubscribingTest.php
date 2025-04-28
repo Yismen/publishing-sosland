@@ -2,11 +2,11 @@
 
 // it selects the correct file based on campaign
 
-use App\Models\Contact;
 use App\Mail\ThankyouForSubscribing;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Event;
+use App\Models\Contact;
 use Illuminate\Mail\Events\MessageSent;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 
 describe('thank you for subscribing email', function () {
     beforeEach(function () {
@@ -23,7 +23,7 @@ describe('thank you for subscribing email', function () {
 
     it('has the default text', function () {
         $contact = Contact::factory()->unNotified()->create([
-            'campaign' => 'Anything containing milling in it'
+            'campaign' => 'Anything containing milling in it',
         ]);
 
         $mailable = new ThankyouForSubscribing($contact);
@@ -33,7 +33,7 @@ describe('thank you for subscribing email', function () {
 
     it('has pet food texts on template', function () {
         $contact = Contact::factory()->unNotified()->create([
-            'campaign' => 'PET_FOOD_PROCESSING'
+            'campaign' => 'PET_FOOD_PROCESSING',
         ]);
 
         $mailable = new ThankyouForSubscribing($contact);
@@ -43,7 +43,7 @@ describe('thank you for subscribing email', function () {
 
     it('has food business texts on template', function () {
         $contact = Contact::factory()->unNotified()->create([
-            'campaign' => 'FOOD_BUSINESS'
+            'campaign' => 'FOOD_BUSINESS',
         ]);
 
         $mailable = new ThankyouForSubscribing($contact);
@@ -54,7 +54,7 @@ describe('thank you for subscribing email', function () {
 
     it('has milling and baking texts on template', function () {
         $contact = Contact::factory()->unNotified()->create([
-            'campaign' => 'BAKING'
+            'campaign' => 'BAKING',
         ]);
 
         $mailable = new ThankyouForSubscribing($contact);
@@ -80,6 +80,5 @@ describe('thank you for subscribing email', function () {
 //     $contact = Contact::factory()->unNotified()->create();
 
 //     Mail::sendNow(new ThankyouForSubscribing($contact));
-
 
 // });

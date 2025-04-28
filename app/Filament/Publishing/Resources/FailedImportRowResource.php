@@ -2,22 +2,19 @@
 
 namespace App\Filament\Publishing\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Illuminate\Support\Arr;
+use App\Filament\Publishing\Resources\FailedImportRowResource\Pages;
 use App\Models\FailedImportRow;
+use Filament\Forms;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
+use Filament\Tables;
 use Filament\Tables\Columns\Layout\Panel;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\Stack;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Publishing\Resources\FailedImportRowResource\Pages;
+use Filament\Tables\Table;
+use Illuminate\Support\Arr;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
-use App\Filament\Publishing\Resources\FailedImportRowResource\RelationManagers;
-use Filament\Support\Colors\Color;
 
 class FailedImportRowResource extends Resource
 {
@@ -56,7 +53,7 @@ class FailedImportRowResource extends Resource
                         Tables\Columns\TextColumn::make('created_at')
                             ->dateTime()
                             ->sortable(),
-                    ])
+                    ]),
                 ]),
                 Panel::make([
                     Tables\Columns\TextColumn::make('data')
@@ -70,13 +67,13 @@ class FailedImportRowResource extends Resource
                                     'Last_Name',
                                     'Phone_Number',
                                     'term_code',
-                                    'script_name'
+                                    'script_name',
                                 ]
                             );
 
                             return json_encode($data, JSON_PRETTY_PRINT);
                         }),
-                ])
+                ]),
             ])
             ->filters([
                 DateRangeFilter::make('created_at'),

@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Cache;
 
 trait InteracstsWithModelCaching
 {
-
     protected static function booted()
     {
         parent::booted();

@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Campaign extends Model
 {
+    use \App\Traits\Models\InteracstsWithModelCaching;
+
     /** @use HasFactory<\Database\Factories\CampaignFactory> */
     use HasFactory;
-    use \App\Traits\Models\InteracstsWithModelCaching;
 
     protected $fillable = [
         'name',
@@ -18,6 +19,7 @@ class Campaign extends Model
         'keywords',
         'keywords_operator',
     ];
+
     protected $casts = [
         'keywords' => 'array',
     ];
@@ -33,7 +35,7 @@ class Campaign extends Model
             explode(
                 ',',
                 str(
-                    join(',', (array)$value)
+                    implode(',', (array) $value)
                 )->lower()
             )
         );

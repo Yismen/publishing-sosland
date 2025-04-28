@@ -2,23 +2,22 @@
 
 namespace App\Filament\Publishing\Pages;
 
-use App\Models\Contact;
-use Filament\Pages\Page;
-use Filament\Tables\Table;
-use Filament\Actions\Action;
-use Filament\Support\Colors\Color;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Contracts\HasTable;
 use App\Filament\Imports\ContactImporter;
-use Filament\Tables\Actions\ImportAction;
+use App\Models\Contact;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Pages\Page;
+use Filament\Support\Colors\Color;
+use Filament\Tables\Actions\ImportAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
 
 class ImportContacts extends Page implements HasForms, HasTable
 {
-    use InteractsWithTable;
     use InteractsWithForms;
+    use InteractsWithTable;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
@@ -27,6 +26,7 @@ class ImportContacts extends Page implements HasForms, HasTable
     public static function canAccess(): bool
     {
         return true;
+
         return auth()->user()->canManageSettings();
     }
 
@@ -51,13 +51,13 @@ class ImportContacts extends Page implements HasForms, HasTable
                     ->copyable()
                     ->searchable()
                     ->limit(15)
-                    ->tooltip(fn($state) => $state),
+                    ->tooltip(fn ($state) => $state),
                 TextColumn::make('campaign')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('disposition')
                     ->limit(15)
-                    ->tooltip(fn($state) => $state)
+                    ->tooltip(fn ($state) => $state)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('email_sent_at')

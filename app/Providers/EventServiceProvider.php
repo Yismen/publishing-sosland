@@ -2,10 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
-use Illuminate\Mail\Events\MessageSent;
-use Illuminate\Support\ServiceProvider;
-use App\Listeners\UpdateEmailSentAtField;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ProvidersEventServiceProvider;
 
 class EventServiceProvider extends ProvidersEventServiceProvider

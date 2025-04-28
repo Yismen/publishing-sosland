@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Models\Disposition;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class DispositionsService
 {
