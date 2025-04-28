@@ -9,15 +9,33 @@ class Campaign extends Model
 {
     /** @use HasFactory<\Database\Factories\CampaignFactory> */
     use HasFactory;
+    use \App\Traits\Models\InteracstsWithModelCaching;
 
     protected $fillable = [
         'name',
         'banner_path',
         'website',
         'keywords',
-        'keywords_separator',
+        'keywords_operator',
     ];
     protected $casts = [
         'keywords' => 'array',
     ];
+
+    public function getKeywordsAttribute($value)
+    {
+        return json_decode($value, true);
+    }
+
+    public function setKeywordsAttribute($value)
+    {
+        $this->attributes['keywords'] = json_encode(
+            explode(
+                ',',
+                str(
+                    join(',', (array)$value)
+                )->lower()
+            )
+        );
+    }
 }

@@ -20,7 +20,7 @@ class CampaignFactory extends Factory
             'name' => $this->faker->unique()->word(),
             'banner_path' => $this->faker->imageUrl(),
             'website' => $this->faker->url(),
-            'keywords_separator' => $this->faker->randomElement(['&', '|']),
+            'keywords_operator' => $this->faker->randomElement(['&', '|']),
             'keywords' => $this->faker->words(3, false),
         ];
     }

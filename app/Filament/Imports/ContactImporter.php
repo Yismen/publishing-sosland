@@ -4,6 +4,7 @@ namespace App\Filament\Imports;
 
 use Carbon\Carbon;
 use App\Models\Contact;
+use App\Rules\ValidCampaign;
 use Illuminate\Validation\Rule;
 use App\Services\DispositionsService;
 use Filament\Actions\Imports\Importer;
@@ -54,7 +55,8 @@ class ContactImporter extends Importer
                 ->requiredMapping()
                 ->rules([
                     'required',
-                    'max:255'
+                    'max:255',
+                    new ValidCampaign
                 ]),
             ImportColumn::make('disposition')
                 ->castStateUsing(fn($state) => str($state)->trim()->lower())

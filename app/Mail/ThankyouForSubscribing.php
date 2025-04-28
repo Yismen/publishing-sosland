@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use App\Services\CampaignBannerInfoService;
+use App\Services\CampaignService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ThankyouForSubscribing extends Mailable implements ShouldQueue
@@ -35,11 +36,13 @@ class ThankyouForSubscribing extends Mailable implements ShouldQueue
      */
     public function content(): Content
     {
+        $campaign = CampaignService::fromString($this->contact->campaign);
+
         return new Content(
             markdown: 'mail.thankyou-for-subscribing',
             with: [
-                'banner_url' => CampaignBannerInfoService::getData($this->contact)['banner_url'],
-                'banner_path' => CampaignBannerInfoService::getData($this->contact)['banner_path'],
+                'banner_url' => $campaign->website,
+                'banner_path' => $campaign->banner_path,
             ]
         );
     }

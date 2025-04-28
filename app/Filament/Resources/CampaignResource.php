@@ -32,11 +32,10 @@ class CampaignResource extends Resource
                 Forms\Components\TextInput::make('website')
                     ->url()
                     ->maxLength(255),
-                Forms\Components\Select::make('keywords_separator')
-                    ->maxLength(1)
+                Forms\Components\Select::make('keywords_operator')
                     ->default('&')
                     ->required()
-                    ->label('Keywords Separator')
+                    ->label('Keywords Operator')
                     ->options([
                         '&' => 'Ampersand (&)',
                         '|' => 'Pipe (|)',
@@ -46,11 +45,11 @@ class CampaignResource extends Resource
                     ->separator(',')
                     ->placeholder('Enter keywords separated by commas')
                     ->label('Keywords')
-                    ->required()
-                    ->reactive()
-                    ->afterStateUpdated(function (callable $set, $state) {
-                        $set('keywords', array_filter(explode(',', str($state)->lower())));
-                    }),
+                // ->required()
+                // ->afterStateUpdated(function (callable $set, $state) {
+                //     $set('keywords', array_filter(explode(',', str($state)->lower())));
+                // })
+                ,
             ]);
     }
 
@@ -64,7 +63,7 @@ class CampaignResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('website')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('keywords_separator'),
+                Tables\Columns\TextColumn::make('keywords_operator'),
                 Tables\Columns\TextColumn::make('keywords')
                     ->badge()
                     ->separator(',')
