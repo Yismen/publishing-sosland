@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Resources\DispositionResource\Pages;
+namespace App\Filament\Publishing\Resources\DispositionResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-use App\Filament\Resources\DispositionResource;
+use App\Filament\Publishing\Resources\DispositionResource;
 
 class EditDisposition extends EditRecord
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\CampaignResource\Pages;
+namespace App\Filament\Publishing\Resources\CampaignResource\Pages;
 
-use App\Filament\Resources\CampaignResource;
+use App\Filament\Publishing\Resources\CampaignResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 

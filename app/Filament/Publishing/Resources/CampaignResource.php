@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Publishing\Resources;
 
-use App\Filament\Resources\CampaignResource\Pages;
-use App\Filament\Resources\CampaignResource\RelationManagers;
+use App\Filament\Publishing\Resources\CampaignResource\Pages;
+use App\Filament\Publishing\Resources\CampaignResource\RelationManagers;
 use App\Models\Campaign;
 use Filament\Forms;
 use Filament\Forms\Form;

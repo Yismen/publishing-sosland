@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\DispositionResource\Pages;
+namespace App\Filament\Publishing\Resources\DispositionResource\Pages;
 
-use App\Filament\Resources\DispositionResource;
+use App\Filament\Publishing\Resources\DispositionResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\ListRecords;
 
-class ManageDispositions extends ManageRecords
+class ListDispositions extends ListRecords
 {
     protected static string $resource = DispositionResource::class;
 

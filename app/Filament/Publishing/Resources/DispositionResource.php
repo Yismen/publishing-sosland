@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Publishing\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
@@ -10,8 +10,8 @@ use App\Models\Disposition;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\DispositionResource\Pages;
-use App\Filament\Resources\DispositionResource\RelationManagers;
+use App\Filament\Publishing\Resources\DispositionResource\Pages;
+use App\Filament\Publishing\Resources\DispositionResource\RelationManagers;
 
 class DispositionResource extends Resource
 {

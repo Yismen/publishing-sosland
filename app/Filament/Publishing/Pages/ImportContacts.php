@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\Publishing\Pages;
 
 use App\Models\Contact;
 use Filament\Pages\Page;
