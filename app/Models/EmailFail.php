@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Models\InteracstsWithModelCaching;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class EmailFail extends Model
 {
-    /** @use HasFactory<\Database\Factories\EmailFailFactory> */
+    /** @use HasFactory<\Database\Factories\EmailFailedFactory> */
     use HasFactory;
+    use InteracstsWithModelCaching;
 
     protected $fillable = [
         'email_failed_at',
@@ -22,4 +24,9 @@ class EmailFail extends Model
         'data' => 'array',
         'exception' => 'array',
     ];
+
+    public function failable()
+    {
+        return $this->morphTo();
+    }
 }

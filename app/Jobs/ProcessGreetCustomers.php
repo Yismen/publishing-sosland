@@ -2,11 +2,12 @@
 
 namespace App\Jobs;
 
-use App\Mail\ThankyouForSubscribing;
+use Throwable;
 use App\Models\Contact;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Queue\Queueable;
+use App\Mail\ThankyouForSubscribing;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ProcessGreetCustomers implements ShouldQueue
 {
@@ -30,6 +31,24 @@ class ProcessGreetCustomers implements ShouldQueue
             }
         } catch (\Throwable $th) {
             $this->contact->updateQuietly(['email_sent_at' => null]);
+
+            $this->contact->failure()->updateOrCreate(
+                [
+                    'failable_id' => $this->contact->id,
+                    'failable_type' => Contact::class,
+                ],
+                [
+                    'email_failed_at' => now(),
+                    'data' => json_encode($this->contact->toArray()),
+                    'exception' => json_encode([
+                        'message' => $th->getMessage(),
+                        'code' => $th->getCode(),
+                        'file' => $th->getFile(),
+                        'line' => $th->getLine(),
+                    ]),
+                ]
+
+            );
         }
     }
 }

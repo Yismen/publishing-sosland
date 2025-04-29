@@ -2,17 +2,21 @@
 
 namespace App\Filament\Publishing\Pages;
 
+use App\Filament\Exports\ContactExporter;
 use App\Filament\Imports\ContactImporter;
 use App\Models\Contact;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use Filament\Support\Colors\Color;
+use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Actions\ImportAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 
 class ImportContacts extends Page implements HasForms, HasTable
 {
@@ -51,13 +55,13 @@ class ImportContacts extends Page implements HasForms, HasTable
                     ->copyable()
                     ->searchable()
                     ->limit(15)
-                    ->tooltip(fn ($state) => $state),
+                    ->tooltip(fn($state) => $state),
                 TextColumn::make('campaign')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('disposition')
                     ->limit(15)
-                    ->tooltip(fn ($state) => $state)
+                    ->tooltip(fn($state) => $state)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('email_sent_at')
@@ -72,7 +76,9 @@ class ImportContacts extends Page implements HasForms, HasTable
                     ->toggledHiddenByDefault(),
             ])
             ->filters([
-                // ...
+                DateRangeFilter::make('date')
+                    ->label('Date')
+                    ->placeholder('Select a date range'),
             ])
             ->actions([
                 // ...
@@ -81,9 +87,16 @@ class ImportContacts extends Page implements HasForms, HasTable
                 ImportAction::make()
                     ->importer(ContactImporter::class)
                     ->color(Color::Blue),
+
             ])
             ->bulkActions([
-                // ...
+                ExportBulkAction::make()
+                    ->label('Export')
+                    ->exporter(ContactExporter::class)
+                    ->color(Color::Green)
+                // ->successNotificationBody(fn($export) => ContactExporter::getCompletedNotificationBody($export))
+                // ->successNotificationTitle('Export completed')
+                ,
             ]);
     }
 }
