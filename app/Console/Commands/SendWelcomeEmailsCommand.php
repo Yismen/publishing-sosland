@@ -30,7 +30,10 @@ class SendWelcomeEmailsCommand extends Command
     {
         $contacts = Contact::query()
             ->whereIn('disposition', DispositionsService::getNames())
+            ->whereDate('date', '>=', now()->subDays(8)->startOfDay())
             ->whereNull('email_sent_at')
+            ->orderBy('date', 'asc')
+            ->take(100)
             ->get();
 
         foreach ($contacts as $contact) {

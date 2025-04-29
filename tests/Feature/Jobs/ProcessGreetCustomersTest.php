@@ -16,7 +16,7 @@ describe('greet new customers', function () {
 
         ProcessGreetCustomers::dispatch($contact);
 
-        Mail::assertQueued(ThankyouForSubscribing::class);
+        Mail::assertSent(ThankyouForSubscribing::class);
     });
 
     it('doesnt send email if there is no new contacts', function () {
@@ -24,7 +24,7 @@ describe('greet new customers', function () {
 
         ProcessGreetCustomers::dispatch($contact);
 
-        Mail::assertNotQueued(ThankyouForSubscribing::class);
+        Mail::assertNotSent(ThankyouForSubscribing::class);
     });
 
     it('only sends the email once', function () {
@@ -36,25 +36,29 @@ describe('greet new customers', function () {
 
         ProcessGreetCustomers::dispatch($contact);
 
-        Mail::assertQueuedCount(1);
+        Mail::assertSentCount(1);
     });
 
-    // it('saves a record of the email when it fails', function () {
-    //     $contact = Contact::factory()->create(['email' => 'invalid-email']);
+    it('saves a record of the email when it fails', function () {
+        $contact = Contact::factory()->create(['email' => 'invalid-email']);
 
-    //     $job = ProcessGreetCustomers::dispatch($contact);
+        Mail::shouldReceive('send')
+            ->once()
+            ->andThrow(new \Exception('Invalid email address'));
 
-    //     $this->assertDatabaseHas(EmailFail::class, [
-    //         'email_failed_at' => now()->format('Y-m-d H:i:s'),
-    //         'failable_id' => $contact->id,
-    //         'failable_type' => Contact::class,
-    //         'data' => json_encode($contact->toArray()),
-    //         'exception' => json_encode([
-    //             'message' => 'Invalid email address',
-    //             'code' => 0,
-    //             'file' => __FILE__,
-    //             'line' => __LINE__,
-    //         ]),
-    //     ]);
-    // });
+        ProcessGreetCustomers::dispatch($contact);
+
+        $this->assertDatabaseHas(EmailFail::class, [
+            'email_failed_at' => now()->format('Y-m-d H:i:s'),
+            'failable_id' => $contact->id,
+            'failable_type' => Contact::class,
+            // 'data' => json_encode($contact->toArray()),
+            // 'exception' => json_encode([
+            //     'message' => 'Invalid email address',
+            //     'code' => 0,
+            //     'file' => __FILE__,
+            //     'line' => __LINE__,
+            // ]),
+        ]);
+    });
 });
