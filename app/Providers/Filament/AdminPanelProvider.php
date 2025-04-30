@@ -2,23 +2,25 @@
 
 namespace App\Providers\Filament;
 
-use App\Services\BreezeCoreService;
-use Filament\Http\Middleware\Authenticate;
-use Filament\Http\Middleware\AuthenticateSession;
-use Filament\Http\Middleware\DisableBladeIconComponents;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
+use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use Illuminate\Routing\Middleware\SubstituteBindings;
+use App\Services\BreezeCoreService;
+use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Cookie\Middleware\EncryptCookies;
 use Stephenjude\FilamentDebugger\DebuggerPlugin;
+use Filament\Http\Middleware\AuthenticateSession;
+use Vormkracht10\FilamentMails\FilamentMailsPlugin;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Vormkracht10\FilamentMails\Facades\FilamentMails;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -54,12 +56,14 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->plugins([
+                FilamentMailsPlugin::make(),
                 BreezeCoreService::make(),
                 DebuggerPlugin::make()
                     ->telescopeNavigation(true)
                     ->horizonNavigation(false)
                     ->pulseNavigation(false),
             ])
+            ->routes(fn() => FilamentMails::routes())
             ->authMiddleware([
                 Authenticate::class,
             ]);
