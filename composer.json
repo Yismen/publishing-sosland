@@ -46,7 +46,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
             "@php artisan filament:upgrade",
-            "@php artisan shield:generate --panel=*"
+            "@php artisan shield:generate --all --panel=* --option=permissions"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
