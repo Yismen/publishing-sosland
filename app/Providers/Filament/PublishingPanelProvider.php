@@ -56,7 +56,7 @@ class PublishingPanelProvider extends PanelProvider
             ])
             ->plugins([
                 BreezeCoreService::make(),
-                FilamentShieldPlugin::make(),
+                // FilamentShieldPlugin::make(),
             ])
             ->authMiddleware([
                 Authenticate::class,
