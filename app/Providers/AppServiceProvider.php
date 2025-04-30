@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use BezhanSalleh\PanelSwitch\PanelSwitch;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use BezhanSalleh\PanelSwitch\PanelSwitch;
+use BezhanSalleh\FilamentShield\FilamentShield;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,5 +29,8 @@ class AppServiceProvider extends ServiceProvider
         Model::preventLazyLoading(! $this->app->isProduction());
         Model::preventAccessingMissingAttributes(! $this->app->isProduction());
         // Model::preventSilentlyDiscardingAttributes(! $this->app->isProduction());
+
+
+        FilamentShield::prohibitDestructiveCommands($this->app->isProduction());
     }
 }

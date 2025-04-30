@@ -2,40 +2,35 @@
 
 namespace App\Filament\Publishing\Pages;
 
+use App\Models\Contact;
+use Filament\Pages\Page;
+use Filament\Tables\Table;
+use Filament\Support\Colors\Color;
+use Illuminate\Support\Facades\Cache;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Contracts\HasTable;
 use App\Filament\Exports\ContactExporter;
 use App\Filament\Imports\ContactImporter;
-use App\Models\Contact;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Pages\Page;
-use Filament\Support\Colors\Color;
 use Filament\Tables\Actions\ExportAction;
-use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Actions\ImportAction;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
-use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
-use Filament\Tables\Table;
-use Illuminate\Support\Facades\Cache;
+use Filament\Tables\Actions\ExportBulkAction;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Tables\Concerns\InteractsWithTable;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 
 class ImportContacts extends Page implements HasForms, HasTable
 {
     use InteractsWithForms;
     use InteractsWithTable;
+    use HasPageShield;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $view = 'filament.pages.import-contacts';
-
-    public static function canAccess(): bool
-    {
-        return true;
-
-        return auth()->user()->canManageSettings();
-    }
 
     public function table(Table $table): Table
     {
@@ -88,7 +83,7 @@ class ImportContacts extends Page implements HasForms, HasTable
                     ->placeholder('Select a disposition')
                     ->multiple()
                     ->options(
-                        Cache::remember('dispositions_list', 60 * 60, function () {
+                        Cache::remember('dispositions_used_list', 60 * 60, function () {
                             return Contact::distinct()
                                 ->pluck('disposition', 'disposition')
                                 ->filter(fn($disposition) => $disposition !== null)

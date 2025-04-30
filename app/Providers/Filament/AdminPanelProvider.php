@@ -14,6 +14,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Stephenjude\FilamentDebugger\DebuggerPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Vormkracht10\FilamentMails\FilamentMailsPlugin;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use FilipFonal\FilamentLogManager\FilamentLogManager;
 use GeoSot\FilamentEnvEditor\FilamentEnvEditorPlugin;
 use Illuminate\Routing\Middleware\SubstituteBindings;
@@ -57,6 +58,7 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->plugins([
+                FilamentShieldPlugin::make(),
                 FilamentMailsPlugin::make(),
                 BreezeCoreService::make(),
                 DebuggerPlugin::make()

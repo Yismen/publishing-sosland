@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\EmailFail;
+use Vormkracht10\Mails\Models\MailEvent;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class EmailFailPolicy
+class MailEventPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class EmailFailPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_email::fail');
+        return $user->can('view_any_suppression');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, EmailFail $emailFail): bool
+    public function view(User $user, MailEvent $mailEvent): bool
     {
-        return $user->can('view_email::fail');
+        return $user->can('view_suppression');
     }
 
     /**
@@ -31,23 +31,23 @@ class EmailFailPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_email::fail');
+        return $user->can('create_suppression');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, EmailFail $emailFail): bool
+    public function update(User $user, MailEvent $mailEvent): bool
     {
-        return $user->can('update_email::fail');
+        return $user->can('update_suppression');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, EmailFail $emailFail): bool
+    public function delete(User $user, MailEvent $mailEvent): bool
     {
-        return $user->can('delete_email::fail');
+        return $user->can('delete_suppression');
     }
 
     /**
@@ -55,15 +55,15 @@ class EmailFailPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_email::fail');
+        return $user->can('delete_any_suppression');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, EmailFail $emailFail): bool
+    public function forceDelete(User $user, MailEvent $mailEvent): bool
     {
-        return $user->can('force_delete_email::fail');
+        return $user->can('force_delete_suppression');
     }
 
     /**
@@ -71,15 +71,15 @@ class EmailFailPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_email::fail');
+        return $user->can('force_delete_any_suppression');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, EmailFail $emailFail): bool
+    public function restore(User $user, MailEvent $mailEvent): bool
     {
-        return $user->can('restore_email::fail');
+        return $user->can('restore_suppression');
     }
 
     /**
@@ -87,15 +87,15 @@ class EmailFailPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_email::fail');
+        return $user->can('restore_any_suppression');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, EmailFail $emailFail): bool
+    public function replicate(User $user, MailEvent $mailEvent): bool
     {
-        return $user->can('replicate_email::fail');
+        return $user->can('replicate_suppression');
     }
 
     /**
@@ -103,6 +103,6 @@ class EmailFailPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_email::fail');
+        return $user->can('reorder_suppression');
     }
 }

@@ -2,17 +2,20 @@
 
 namespace App\Policies;
 
-use App\Models\Disposition;
 use App\Models\User;
+use App\Models\Disposition;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class DispositionPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->can('view_any_disposition');
     }
 
     /**
@@ -20,7 +23,7 @@ class DispositionPolicy
      */
     public function view(User $user, Disposition $disposition): bool
     {
-        return true;
+        return $user->can('view_disposition');
     }
 
     /**
@@ -28,7 +31,7 @@ class DispositionPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->can('create_disposition');
     }
 
     /**
@@ -36,7 +39,7 @@ class DispositionPolicy
      */
     public function update(User $user, Disposition $disposition): bool
     {
-        return true;
+        return $user->can('update_disposition');
     }
 
     /**
@@ -44,22 +47,62 @@ class DispositionPolicy
      */
     public function delete(User $user, Disposition $disposition): bool
     {
-        return true;
+        return $user->can('delete_disposition');
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
      */
-    public function restore(User $user, Disposition $disposition): bool
+    public function deleteAny(User $user): bool
     {
-        return true;
+        return $user->can('delete_any_disposition');
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Disposition $disposition): bool
     {
-        return true;
+        return $user->can('force_delete_disposition');
+    }
+
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('force_delete_any_disposition');
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, Disposition $disposition): bool
+    {
+        return $user->can('restore_disposition');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_disposition');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Disposition $disposition): bool
+    {
+        return $user->can('replicate_disposition');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_disposition');
     }
 }

@@ -2,18 +2,20 @@
 
 namespace App\Policies;
 
-use App\Models\FailedImportRow;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\FailedImportRow;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FailedImportRowPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->can('view_any_failed::import::row');
     }
 
     /**
@@ -21,7 +23,7 @@ class FailedImportRowPolicy
      */
     public function view(User $user, FailedImportRow $failedImportRow): bool
     {
-        return true;
+        return $user->can('view_failed::import::row');
     }
 
     /**
@@ -29,7 +31,7 @@ class FailedImportRowPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->can('create_failed::import::row');
     }
 
     /**
@@ -37,7 +39,7 @@ class FailedImportRowPolicy
      */
     public function update(User $user, FailedImportRow $failedImportRow): bool
     {
-        return true;
+        return $user->can('update_failed::import::row');
     }
 
     /**
@@ -45,22 +47,62 @@ class FailedImportRowPolicy
      */
     public function delete(User $user, FailedImportRow $failedImportRow): bool
     {
-        return true;
+        return $user->can('delete_failed::import::row');
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
      */
-    public function restore(User $user, FailedImportRow $failedImportRow): bool
+    public function deleteAny(User $user): bool
     {
-        return true;
+        return $user->can('delete_any_failed::import::row');
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, FailedImportRow $failedImportRow): bool
     {
-        return true;
+        return $user->can('force_delete_failed::import::row');
+    }
+
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('force_delete_any_failed::import::row');
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, FailedImportRow $failedImportRow): bool
+    {
+        return $user->can('restore_failed::import::row');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_failed::import::row');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, FailedImportRow $failedImportRow): bool
+    {
+        return $user->can('replicate_failed::import::row');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_failed::import::row');
     }
 }

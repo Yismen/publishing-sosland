@@ -2,17 +2,20 @@
 
 namespace App\Policies;
 
-use App\Models\Campaign;
 use App\Models\User;
+use App\Models\Campaign;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CampaignPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->can('view_any_campaign');
     }
 
     /**
@@ -20,7 +23,7 @@ class CampaignPolicy
      */
     public function view(User $user, Campaign $campaign): bool
     {
-        return true;
+        return $user->can('view_campaign');
     }
 
     /**
@@ -28,7 +31,7 @@ class CampaignPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->can('create_campaign');
     }
 
     /**
@@ -36,7 +39,7 @@ class CampaignPolicy
      */
     public function update(User $user, Campaign $campaign): bool
     {
-        return true;
+        return $user->can('update_campaign');
     }
 
     /**
@@ -44,22 +47,62 @@ class CampaignPolicy
      */
     public function delete(User $user, Campaign $campaign): bool
     {
-        return true;
+        return $user->can('delete_campaign');
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
      */
-    public function restore(User $user, Campaign $campaign): bool
+    public function deleteAny(User $user): bool
     {
-        return true;
+        return $user->can('delete_any_campaign');
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Campaign $campaign): bool
     {
-        return true;
+        return $user->can('force_delete_campaign');
+    }
+
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('force_delete_any_campaign');
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, Campaign $campaign): bool
+    {
+        return $user->can('restore_campaign');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_campaign');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Campaign $campaign): bool
+    {
+        return $user->can('replicate_campaign');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_campaign');
     }
 }
