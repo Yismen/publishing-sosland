@@ -14,8 +14,9 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Stephenjude\FilamentDebugger\DebuggerPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Vormkracht10\FilamentMails\FilamentMailsPlugin;
+use FilipFonal\FilamentLogManager\FilamentLogManager;
+use GeoSot\FilamentEnvEditor\FilamentEnvEditorPlugin;
 use Illuminate\Routing\Middleware\SubstituteBindings;
-use Vormkracht10\FilamentMails\Facades\FilamentMails;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -62,8 +63,34 @@ class AdminPanelProvider extends PanelProvider
                     ->telescopeNavigation(true)
                     ->horizonNavigation(false)
                     ->pulseNavigation(false),
+                FilamentLogManager::make(),
+                FilamentEnvEditorPlugin::make()
+                    ->navigationGroup('Settings')
+                    ->navigationLabel('Env Editor')
+                    ->navigationIcon('heroicon-o-document-text')
+                    ->navigationSort(1)
+                    ->hideKeys(
+                        'APP_KEY',
+                        'APP_URL',
+                        'DB_PASSWORD',
+                        'DB_DATABASE',
+                        'DB_HOST',
+                        'DB_USERNAME',
+                        'DB_CONNECTION',
+                        'DB_HOST',
+                        'DB_PORT',
+                        'MAIL_PASSWORD',
+                        'MAIL_USERNAME',
+                        'MAIL_HOST',
+                        'MAIL_PORT',
+                        'MAIL_ENCRYPTION',
+                        'MAIL_FROM_ADDRESS',
+                        'MAIL_FROM_NAME',
+                        'MAIL_MAILER',
+                        'MAIL_ENCRYPTION',
+
+                    ),
             ])
-            ->routes(fn() => FilamentMails::routes())
             ->authMiddleware([
                 Authenticate::class,
             ]);
