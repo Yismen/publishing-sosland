@@ -15,7 +15,10 @@ use Filament\Tables\Actions\ImportAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Cache;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 
 class ImportContacts extends Page implements HasForms, HasTable
@@ -76,6 +79,23 @@ class ImportContacts extends Page implements HasForms, HasTable
                     ->toggledHiddenByDefault(),
             ])
             ->filters([
+                TernaryFilter::make('email_sent_at')
+                    ->label('Email Sent')
+                    ->placeholder('Select a date range')
+                    ->placeholder('Email Sent'),
+                SelectFilter::make('disposition')
+                    ->label('Disposition')
+                    ->placeholder('Select a disposition')
+                    ->multiple()
+                    ->options(
+                        Cache::remember('dispositions_list', 60 * 60, function () {
+                            return Contact::distinct()
+                                ->pluck('disposition', 'disposition')
+                                ->filter(fn($disposition) => $disposition !== null)
+                                ->map(fn($disposition) => [$disposition => $disposition])
+                                ->toArray();
+                        })
+                    ),
                 DateRangeFilter::make('date')
                     ->label('Date')
                     ->placeholder('Select a date range'),
